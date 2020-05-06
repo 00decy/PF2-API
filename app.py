@@ -31,10 +31,20 @@ def index():
 def traits():
     db = dbconfig()
 
-    # queries traits table for all rows
-    rows = db.execute('SELECT * FROM traits').fetchall()
+    id = request.args.get('id')
+
+    if id:
+        # queries traits table for row by id
+        rows = db.execute('SELECT * FROM traits WHERE id=?', [id]).fetchall()
+
+    else:
+        # queries traits table for all rows
+        rows = db.execute('SELECT * FROM traits').fetchall()
 
     response = {'count': len(rows), 'reults': rows}
+
+    # close database connection
+    db.close()
 
     # returns json
     return jsonify(response)
