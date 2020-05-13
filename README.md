@@ -7,7 +7,7 @@ Database built with SQLite3.
 Content use protected by Open Game Licence.
 All Pathfinder content is owned by Paizo Publishing, LLC, which are used under Paizo's Community Use Policy. I am expressly prohibited from charging you to use or access this content. This applicaton is not published, endorsed, or specifically approved by Paizo Publishing. For more information about Paizo's Community Use Policy, please visit paizo.com/communityuse. For more information about Paizo Publishing and Paizo products, please visit paizo.com.
 
-## Documentation
+## API Documentation
 
 All text is UTF-8 encoded
 
@@ -17,10 +17,15 @@ Returns JSON data for traits.
 
 Accepts following query parameters:
 1. id - integer
+ - eg
+ `/traits?id=69`
+2. source - text
+ - book eg
+ `/traits?source=Core+Rulebook`
+ - optional page number eg
+ `/traits?source=Core+Rulebook+pg.+628`
 
-eg `/traits?id=69`
-
-All other queries ignored. Invalid query values return empty `results`.
+All other queries ignored. Queries return empty `results` list if no matches are found.
 If none of the listed query parameters are given, returns all traits.
 
 example:
@@ -52,11 +57,16 @@ Returns JSON data for feats.
 
 Accepts following query parameters:
 1. id - integer
+ - eg
+ `/feats?id=69`
+2. source - text
+ - book eg
+ `/feats?source=Core+Rulebook`
+ - optional page number eg
+ `/feats?source=Core+Rulebook+pg.+101`
 
-eg `/feats?id=69`
-
-All other queries ignored. Invalid query values return empty `results`.
-If none of the listed query parameters are given, returns all feats.
+All other queries ignored. Queries return empty `results` list if no matches are found.
+If none of the listed query parameters are given, returns all traits.
 
 example:
 ```
@@ -104,4 +114,4 @@ example:
   - traits: list, text all traits of the feat
 
 
-- For feats without relevent info some fields are left `null`
+- For feats without the relevent info those fields are left `null`
