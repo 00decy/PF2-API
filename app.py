@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, jsonify, redirect, request
+from flask import Flask, jsonify, request
 
 # Configure applicaton
 app = Flask(__name__)
@@ -14,7 +14,7 @@ def dict_factory(cursor, row):
     return d
 
 
-# Configure connection to database
+# def of database configuration
 def dbconfig():
     database = sqlite3.connect('pathfinder2.db')
     database.row_factory = dict_factory
@@ -32,14 +32,26 @@ def traits():
     db = dbconfig()
 
     id = request.args.get('id')
+    source = request.args.get('source')
+
+    query = 'SELECT * FROM traits WHERE'
+    to_query = []
 
     if id:
-        # queries traits table for row by id
-        rows = db.execute('SELECT * FROM traits WHERE id=?', (id,)).fetchall()
+        # adds id to query
+        query += ' id=? AND'
+        to_query.append(int(id))
+    if source:
+        # adds source to query
+        query += ' source LIKE ? AND'
+        to_query.append(source + '%')
 
-    else:
+    if not (id or source):
         # queries traits table for all rows
         rows = db.execute('SELECT * FROM traits').fetchall()
+    else:
+        # queries traits table based on uery parameters
+        rows = db.execute(query[:-4], to_query).fetchall()
 
     response = {'count': len(rows), 'reults': rows}
 
@@ -55,14 +67,26 @@ def feats():
     db = dbconfig()
 
     id = request.args.get('id')
+    source = request.args.get('source')
+
+    query = 'SELECT * FROM feats WHERE'
+    to_query = []
 
     if id:
-        # queries feats table for row by id
-        rows = db.execute('SELECT * FROM feats WHERE id=?', (id,)).fetchall()
+        # adds id to query
+        query += ' id=? AND'
+        to_query.append(int(id))
+    if source:
+        # adds source to query
+        query += ' source LIKE ? AND'
+        to_query.append(source + '%')
 
-    else:
-        # queries feats table for all rows
+    if not (id or source):
+        # queries traits table for all rows
         rows = db.execute('SELECT * FROM feats').fetchall()
+    else:
+        # queries traits table based on uery parameters
+        rows = db.execute(query[:-4] + ';', to_query).fetchall()
 
     # need the traits for each feat
     for row in rows:
