@@ -51,7 +51,7 @@ def traits():
         rows = db.execute('SELECT * FROM traits').fetchall()
     else:
         # queries traits table based on uery parameters
-        rows = db.execute(query[:-4], to_query).fetchall()
+        rows = db.execute(query[:-4] + ';', to_query).fetchall()
 
     response = {'count': len(rows), 'reults': rows}
 
