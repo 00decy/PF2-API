@@ -35,7 +35,7 @@ def traits():
 
     if id:
         # queries traits table for row by id
-        rows = db.execute('SELECT * FROM traits WHERE id=?', [id]).fetchall()
+        rows = db.execute('SELECT * FROM traits WHERE id=?', (id,)).fetchall()
 
     else:
         # queries traits table for all rows
@@ -58,7 +58,7 @@ def feats():
 
     if id:
         # queries feats table for row by id
-        rows = db.execute('SELECT * FROM feats WHERE id=?', [id]).fetchall()
+        rows = db.execute('SELECT * FROM feats WHERE id=?', (id,)).fetchall()
 
     else:
         # queries feats table for all rows
