@@ -17,15 +17,16 @@ Returns JSON data for traits.
 
 Accepts following query parameters:
 1. id - integer
- - eg
+ - trait id number, eg
  `/traits?id=69`
 2. source - text
- - book eg
+ - book title eg
  `/traits?source=Core+Rulebook`
  - optional page number eg
  `/traits?source=Core+Rulebook+pg.+628`
 3. name - text
- - eg `/traits?name=Aberration`
+ - trait name, eg
+ `/traits?name=Aberration`
 
 All other query parameters ignored. Queries return empty `results` list if no matches are found.
 If none of the listed query parameters are given, returns all traits.
@@ -59,21 +60,29 @@ Returns JSON data for feats.
 
 Accepts following query parameters:
 1. id - integer
- - eg
+ - feat id number, eg
  `/feats?id=69`
 2. source - text
- - book eg
+ - book title, eg
  `/feats?source=Core+Rulebook`
- - optional page number eg
+ - optional page number, eg
  `/feats?source=Core+Rulebook+pg.+101`
 3. name - text
- - eg `/feats?name=Harmonize`
+ - feat name, eg
+ `/feats?name=Harmonize`
 4. action - text
- - eg `/feats?action=Single+Action`
+ - action type, eg
+ `/feats?action=Single+Action`
 5. level - integer
- - eg `/feats?level=6`
+ - feat level, eg
+ `/feats?level=6`
 6. archetype - text
- - eg `/feats?archetype=Fighter`
+ - archetype name, g
+ `/feats?archetype=Fighter`
+7. trait - text
+ - single trait name, eg
+ `/feats?trait=Additive`
+ - multiple trait names or any additional trait values like 'Additive 1' will return empty results list
 
 All other query parameters ignored. Queries return empty `results` list if no matches are found.
 If none of the listed query parameters are given, returns all feats.
@@ -121,7 +130,7 @@ example: `/feats`
   - trigger: text the trigger for a reaction feat
   - description: text full description
   - source: text book title and page number of original source
-  - traits: list, text all traits of the feat
+  - traits: list of text trait names (with any additional trait values) of the feat
 
 
 - For feats without the relevent info those fields are left `null`
