@@ -24,11 +24,13 @@ Accepts following query parameters:
  `/traits?source=Core+Rulebook`
  - optional page number eg
  `/traits?source=Core+Rulebook+pg.+628`
+3. name - text
+ - eg `/traits?name=Aberration`
 
 All other queries ignored. Queries return empty `results` list if no matches are found.
 If none of the listed query parameters are given, returns all traits.
 
-example:
+example: `/traits`
 ```
 {
     "count": 284,
@@ -64,11 +66,19 @@ Accepts following query parameters:
  `/feats?source=Core+Rulebook`
  - optional page number eg
  `/feats?source=Core+Rulebook+pg.+101`
+3. name - text
+ - eg `/feats?name=Harmonize`
+4. action - text
+ - eg `/feats?action=Single+Action`
+5. level - integer
+ - eg `/feats?level=6`
+6. archetype - text
+ - eg `/feats?archetype=Fighter`
 
-All other queries ignored. Queries return empty `results` list if no matches are found.
+All other query parameters ignored. Queries return empty `results` list if no matches are found.
 If none of the listed query parameters are given, returns all traits.
 
-example:
+example: `/feats`
 ```
 {
   "count": 1182,

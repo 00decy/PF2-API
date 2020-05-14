@@ -33,6 +33,7 @@ def traits():
 
     id = request.args.get('id')
     source = request.args.get('source')
+    name = request.args.get('name')
 
     query = 'SELECT * FROM traits WHERE'
     to_query = []
@@ -45,8 +46,12 @@ def traits():
         # adds source to query
         query += ' source LIKE ? AND'
         to_query.append(source + '%')
+    if name:
+        # add name to query
+        query += ' name=? AND'
+        to_query.append(name)
 
-    if not (id or source):
+    if not (id or source or name):
         # queries traits table for all rows
         rows = db.execute('SELECT * FROM traits').fetchall()
     else:
@@ -68,6 +73,10 @@ def feats():
 
     id = request.args.get('id')
     source = request.args.get('source')
+    name = request.args.get('name')
+    action = request.args.get('action')
+    level = request.args.get('level')
+    archetype = request.args.get('archetype')
 
     query = 'SELECT * FROM feats WHERE'
     to_query = []
@@ -80,8 +89,24 @@ def feats():
         # adds source to query
         query += ' source LIKE ? AND'
         to_query.append(source + '%')
+    if name:
+        # add name to query
+        query += ' name=? AND'
+        to_query.append(name)
+    if action:
+        # add action to query
+        query += ' action=? AND'
+        to_query.append(action)
+    if level:
+        # add level to query
+        query += ' level=? AND'
+        to_query.append(int(level))
+    if archetype:
+        # add archetype to query
+        query += ' archetype=? AND'
+        to_query.append(archetype)
 
-    if not (id or source):
+    if not (id or source or name or action or level or archetype):
         # queries traits table for all rows
         rows = db.execute('SELECT * FROM feats').fetchall()
     else:
