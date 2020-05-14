@@ -27,7 +27,7 @@ Accepts following query parameters:
 3. name - text
  - eg `/traits?name=Aberration`
 
-All other queries ignored. Queries return empty `results` list if no matches are found.
+All other query parameters ignored. Queries return empty `results` list if no matches are found.
 If none of the listed query parameters are given, returns all traits.
 
 example: `/traits`
@@ -76,7 +76,7 @@ Accepts following query parameters:
  - eg `/feats?archetype=Fighter`
 
 All other query parameters ignored. Queries return empty `results` list if no matches are found.
-If none of the listed query parameters are given, returns all traits.
+If none of the listed query parameters are given, returns all feats.
 
 example: `/feats`
 ```
